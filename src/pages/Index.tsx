@@ -116,6 +116,35 @@ const Index = () => {
           </div>
         </div>
 
+        <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_2.5s_ease-out]">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            Поддержать проект
+          </h2>
+          
+          <div className="space-y-6 text-gray-300 text-lg">
+            <p className="leading-relaxed text-center">
+              Если вам понравился наш проект и вы хотите поддержать его развитие, будем благодарны за любую помощь!
+            </p>
+            
+            <div className="bg-[#252525] rounded-xl p-6 border border-gray-700">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center justify-center">
+                <Icon name="Gift" className="mr-2" size={24} />
+                Способы поддержки
+              </h3>
+              <div className="space-y-4 text-gray-300">
+                <div className="flex items-start gap-3">
+                  <Icon name="Star" className="text-gray-400 mt-1 flex-shrink-0" size={20} />
+                  <p>Отправьте подарок в Telegram на <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors underline">@fuckIsolated</a></p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Icon name="CreditCard" className="text-gray-400 mt-1 flex-shrink-0" size={20} />
+                  <p>Напишите <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors underline">@fuckIsolated</a>, чтобы уточнить карту для денежной поддержки</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <footer className="text-center py-8">
           <p className="text-gray-500 text-sm">
             Админ проекта: <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">@fuckIsolated</a>
