@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { Input } from '@/components/ui/input';
 
 const Index = () => {
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; twinkleDuration: string; floatDuration: string; delay: string }>>([]);
+  const [dorkQuery, setDorkQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const generatedStars = Array.from({ length: 250 }, (_, i) => ({
@@ -143,6 +146,102 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_3s_ease-out]">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            Google Dorking
+          </h2>
+          
+          <div className="space-y-6">
+            <p className="text-gray-300 text-lg text-center leading-relaxed">
+              Введите запрос для поиска в Google с точными совпадениями
+            </p>
+            
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder='Например: site:example.com "admin panel"'
+                  value={dorkQuery}
+                  onChange={(e) => setDorkQuery(e.target.value)}
+                  className="w-full bg-[#252525] border-gray-700 text-white placeholder:text-gray-500 h-14 text-lg px-6 pr-14 focus:border-gray-600 focus:ring-2 focus:ring-gray-600"
+                />
+                <Icon name="Search" className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400" size={24} />
+              </div>
+            </div>
+
+            {dorkQuery && (
+              <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 mt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-white flex items-center">
+                    <Icon name="ExternalLink" className="mr-2" size={20} />
+                    Результаты поиска
+                  </h3>
+                  {isSearching && (
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span className="text-sm">Поиск...</span>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="p-4 bg-[#1a1a1a] rounded-lg border border-gray-800">
+                    <p className="text-gray-300 mb-3">
+                      Ваш запрос: <span className="text-white font-mono bg-[#0a0a0a] px-2 py-1 rounded">{dorkQuery}</span>
+                    </p>
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(dorkQuery)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsSearching(true)}
+                      className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+                    >
+                      <Icon name="Search" size={20} />
+                      Открыть результаты в Google
+                    </a>
+                  </div>
+
+                  <div className="p-4 bg-[#1a1a1a] rounded-lg border border-gray-800">
+                    <h4 className="text-white font-semibold mb-3 flex items-center">
+                      <Icon name="Info" className="mr-2" size={18} />
+                      Полезные операторы Google Dork:
+                    </h4>
+                    <ul className="space-y-2 text-gray-300 text-sm">
+                      <li className="flex items-start gap-2">
+                        <span className="text-gray-500">•</span>
+                        <span><code className="bg-[#0a0a0a] px-2 py-0.5 rounded text-white">site:</code> - поиск на конкретном сайте</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gray-500">•</span>
+                        <span><code className="bg-[#0a0a0a] px-2 py-0.5 rounded text-white">filetype:</code> - поиск по типу файла</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gray-500">•</span>
+                        <span><code className="bg-[#0a0a0a] px-2 py-0.5 rounded text-white">intitle:</code> - поиск в заголовке страницы</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gray-500">•</span>
+                        <span><code className="bg-[#0a0a0a] px-2 py-0.5 rounded text-white">inurl:</code> - поиск в URL адресе</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-gray-500">•</span>
+                        <span><code className="bg-[#0a0a0a] px-2 py-0.5 rounded text-white">"точная фраза"</code> - поиск точного совпадения</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {!dorkQuery && (
+              <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center">
+                <Icon name="Search" className="mx-auto mb-4 text-gray-500" size={48} />
+                <p className="text-gray-400">Начните вводить запрос для поиска</p>
+              </div>
+            )}
           </div>
         </div>
 
