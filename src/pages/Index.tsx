@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; duration: string; delay: string }>>([]);
+  const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; twinkleDuration: string; floatDuration: string; delay: string }>>([]);
 
   useEffect(() => {
     const generatedStars = Array.from({ length: 250 }, (_, i) => ({
@@ -11,8 +11,9 @@ const Index = () => {
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       size: `${Math.random() * 3 + 1}px`,
-      duration: `${Math.random() * 4 + 2}s`,
-      delay: `${Math.random() * 3}s`
+      twinkleDuration: `${Math.random() * 3 + 2}s`,
+      floatDuration: `${Math.random() * 15 + 10}s`,
+      delay: `${Math.random() * 5}s`
     }));
     setStars(generatedStars);
   }, []);
@@ -28,7 +29,7 @@ const Index = () => {
             top: star.top,
             width: star.size,
             height: star.size,
-            animationDuration: star.duration,
+            animationDuration: `${star.twinkleDuration}, ${star.floatDuration}`,
             animationDelay: star.delay
           }}
         />
