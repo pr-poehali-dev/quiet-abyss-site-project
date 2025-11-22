@@ -52,7 +52,7 @@ const Index = () => {
       '914': { operator: 'МТС', region: 'Красноярский край', timezone: 'UTC+7' },
       '915': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
       '916': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
-      '917': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '917': { operator: 'МТС', region: 'Республика Башкортостан', timezone: 'UTC+5' },
       '918': { operator: 'МТС', region: 'Краснодарский край', timezone: 'UTC+3' },
       '919': { operator: 'МТС', region: 'Волгоградская область', timezone: 'UTC+3' },
       '920': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
@@ -88,6 +88,7 @@ const Index = () => {
       '967': { operator: 'Билайн', region: 'Волгоградская область', timezone: 'UTC+3' },
       '968': { operator: 'Билайн', region: 'Пермский край', timezone: 'UTC+5' },
       '969': { operator: 'Билайн', region: 'Свердловская область', timezone: 'UTC+5' },
+      '970': { operator: 'Билайн', region: 'Челябинская область', timezone: 'UTC+5' },
       '977': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
       '978': { operator: 'МТС', region: 'Республика Татарстан', timezone: 'UTC+3' },
       '980': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
@@ -104,6 +105,10 @@ const Index = () => {
       '992': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
       '993': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
       '994': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
+      '996': { operator: 'МТС', region: 'Приморский край', timezone: 'UTC+10' },
+      '997': { operator: 'МТС', region: 'Республика Саха (Якутия)', timezone: 'UTC+9' },
+      '998': { operator: 'МТС', region: 'Хабаровский край', timezone: 'UTC+10' },
+      '999': { operator: 'МТС', region: 'Сахалинская область', timezone: 'UTC+11' },
     };
 
     const code = cleanPhone.substring(1, 4);
