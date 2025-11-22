@@ -7,6 +7,9 @@ const Index = () => {
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; twinkleDuration: string; floatDuration: string; delay: string }>>([]);
   const [dorkQuery, setDorkQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneInfo, setPhoneInfo] = useState<any>(null);
+  const [isChecking, setIsChecking] = useState(false);
 
   useEffect(() => {
     const generatedStars = Array.from({ length: 250 }, (_, i) => ({
@@ -20,6 +23,126 @@ const Index = () => {
     }));
     setStars(generatedStars);
   }, []);
+
+  const checkPhoneNumber = () => {
+    setIsChecking(true);
+    
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    
+    if (cleanPhone.length < 10) {
+      setPhoneInfo({ error: 'Некорректный номер телефона' });
+      setIsChecking(false);
+      return;
+    }
+
+    const phoneData: Record<string, any> = {
+      '495': { region: 'Москва', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '499': { region: 'Москва', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '812': { region: 'Санкт-Петербург', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '383': { region: 'Новосибирск', timezone: 'UTC+7', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '343': { region: 'Екатеринбург', timezone: 'UTC+5', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '846': { region: 'Самара', timezone: 'UTC+4', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '861': { region: 'Краснодар', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '391': { region: 'Красноярск', timezone: 'UTC+7', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+      '423': { region: 'Казань', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+    };
+
+    const mobileOperators: Record<string, string> = {
+      '900': 'МТС',
+      '901': 'МТС', 
+      '902': 'МТС',
+      '903': 'Билайн',
+      '904': 'Билайн',
+      '905': 'Билайн',
+      '906': 'Билайн',
+      '908': 'Билайн',
+      '909': 'Билайн',
+      '910': 'МТС',
+      '911': 'МТС',
+      '912': 'МТС',
+      '913': 'МТС',
+      '914': 'МТС',
+      '915': 'МТС',
+      '916': 'МТС',
+      '917': 'МТС',
+      '918': 'МТС',
+      '919': 'МТС',
+      '920': 'Мегафон',
+      '921': 'Мегафон',
+      '922': 'Мегафон',
+      '923': 'Мегафон',
+      '924': 'Мегафон',
+      '925': 'Мегафон',
+      '926': 'Мегафон',
+      '927': 'Мегафон',
+      '928': 'Мегафон',
+      '929': 'Мегафон',
+      '930': 'Мегафон',
+      '931': 'Мегафон',
+      '932': 'Мегафон',
+      '933': 'Мегафон',
+      '934': 'Мегафон',
+      '936': 'Мегафон',
+      '937': 'Мегафон',
+      '938': 'Мегафон',
+      '939': 'Мегафон',
+      '950': 'Билайн',
+      '951': 'Билайн',
+      '952': 'Билайн',
+      '953': 'Билайн',
+      '960': 'Билайн',
+      '961': 'Билайн',
+      '962': 'Билайн',
+      '963': 'Билайн',
+      '964': 'Билайн',
+      '965': 'Билайн',
+      '966': 'Билайн',
+      '967': 'Билайн',
+      '968': 'Билайн',
+      '969': 'Билайн',
+      '977': 'МТС',
+      '978': 'МТС',
+      '980': 'МТС',
+      '981': 'МТС',
+      '982': 'МТС',
+      '983': 'МТС',
+      '984': 'МТС',
+      '985': 'МТС',
+      '986': 'МТС',
+      '987': 'МТС',
+      '988': 'МТС',
+      '989': 'МТС',
+    };
+
+    let code = cleanPhone.substring(1, 4);
+    let info = phoneData[code];
+
+    if (!info) {
+      code = cleanPhone.substring(0, 3);
+      const operator = mobileOperators[code];
+      
+      if (operator) {
+        info = {
+          region: 'Мобильный номер',
+          timezone: 'Зависит от региона',
+          operator: operator,
+          status: 'Обслуживается'
+        };
+      } else {
+        info = {
+          region: 'Неизвестный регион',
+          timezone: 'Неизвестно',
+          operator: 'Неизвестный оператор',
+          status: 'Не обслуживается'
+        };
+      }
+    }
+
+    setTimeout(() => {
+      setPhoneInfo(info);
+      setIsChecking(false);
+    }, 800);
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden px-4 py-12">
@@ -77,6 +200,17 @@ const Index = () => {
             >
               <Icon name="Search" className="mr-2" size={20} />
               Google Dorking
+            </Button>
+
+            <Button 
+              onClick={() => {
+                const phoneSection = document.getElementById('phone-check-section');
+                phoneSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
+            >
+              <Icon name="Phone" className="mr-2" size={20} />
+              Проверка номера
             </Button>
           </div>
         </div>
@@ -251,6 +385,95 @@ const Index = () => {
               <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center">
                 <Icon name="Search" className="mx-auto mb-4 text-gray-500" size={48} />
                 <p className="text-gray-400">Начните вводить запрос для поиска</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div id="phone-check-section" className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_3s_ease-out]">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            Проверка номера телефона
+          </h2>
+
+          <div className="space-y-6">
+            <div className="flex gap-3">
+              <Input
+                type="tel"
+                placeholder="+7 (900) 123-45-67"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="flex-1 bg-[#252525] border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-600"
+              />
+              <Button 
+                onClick={checkPhoneNumber}
+                disabled={isChecking || !phoneNumber}
+                className="bg-white text-black hover:bg-gray-200 transition-colors"
+              >
+                {isChecking ? (
+                  <>
+                    <Icon name="Loader2" className="mr-2 animate-spin" size={18} />
+                    Проверка...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Phone" className="mr-2" size={18} />
+                    Проверить
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {phoneInfo && !phoneInfo.error && (
+              <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 space-y-4 animate-[fadeIn_0.5s_ease-out]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="MapPin" className="text-gray-400" size={20} />
+                      <span className="text-gray-400 text-sm">Регион</span>
+                    </div>
+                    <p className="text-white text-lg font-semibold">{phoneInfo.region}</p>
+                  </div>
+
+                  <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="Clock" className="text-gray-400" size={20} />
+                      <span className="text-gray-400 text-sm">Часовой пояс</span>
+                    </div>
+                    <p className="text-white text-lg font-semibold">{phoneInfo.timezone}</p>
+                  </div>
+
+                  <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="Signal" className="text-gray-400" size={20} />
+                      <span className="text-gray-400 text-sm">Оператор</span>
+                    </div>
+                    <p className="text-white text-lg font-semibold">{phoneInfo.operator}</p>
+                  </div>
+
+                  <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="CheckCircle2" className="text-gray-400" size={20} />
+                      <span className="text-gray-400 text-sm">Состояние</span>
+                    </div>
+                    <p className={`text-lg font-semibold ${phoneInfo.status === 'Обслуживается' ? 'text-green-400' : 'text-red-400'}`}>
+                      {phoneInfo.status}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {phoneInfo?.error && (
+              <div className="bg-red-900/20 border border-red-800 rounded-xl p-4 flex items-center gap-3">
+                <Icon name="AlertCircle" className="text-red-400" size={24} />
+                <p className="text-red-400">{phoneInfo.error}</p>
+              </div>
+            )}
+
+            {!phoneInfo && (
+              <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center">
+                <Icon name="Phone" className="mx-auto mb-4 text-gray-500" size={48} />
+                <p className="text-gray-400">Введите номер телефона для проверки</p>
               </div>
             )}
           </div>
