@@ -119,13 +119,13 @@ const Index = () => {
 
             <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
               <Icon name="Shield" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>30+</div>
+              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>35+</div>
               <div className="text-gray-400 text-sm uppercase tracking-wider">Под защитой</div>
             </div>
 
             <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
               <Icon name="Briefcase" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>20+</div>
+              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>25+</div>
               <div className="text-gray-400 text-sm uppercase tracking-wider">Работ выполнено</div>
             </div>
           </div>
