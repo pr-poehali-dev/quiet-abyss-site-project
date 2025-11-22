@@ -67,6 +67,17 @@ const Index = () => {
                 Бесплатная помощь
               </Button>
             </a>
+
+            <Button 
+              onClick={() => {
+                const dorkSection = document.getElementById('dorking-section');
+                dorkSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
+            >
+              <Icon name="Search" className="mr-2" size={20} />
+              Google Dorking
+            </Button>
           </div>
         </div>
 
@@ -149,7 +160,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_3s_ease-out]">
+        <div id="dorking-section" className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_3s_ease-out]">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Google Dorking
           </h2>
