@@ -35,107 +35,96 @@ const Index = () => {
       return;
     }
 
-    const phoneData: Record<string, any> = {
-      '495': { region: 'Москва', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '499': { region: 'Москва', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '812': { region: 'Санкт-Петербург', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '383': { region: 'Новосибирск', timezone: 'UTC+7', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '343': { region: 'Екатеринбург', timezone: 'UTC+5', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '846': { region: 'Самара', timezone: 'UTC+4', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '861': { region: 'Краснодар', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '391': { region: 'Красноярск', timezone: 'UTC+7', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
-      '423': { region: 'Казань', timezone: 'UTC+3', operator: 'МТС/Билайн/Мегафон', status: 'Обслуживается' },
+    const mobileCodeRegions: Record<string, { operator: string; region: string; timezone: string }> = {
+      '900': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '901': { operator: 'МТС', region: 'Санкт-Петербург и ЛО', timezone: 'UTC+3' },
+      '902': { operator: 'МТС', region: 'Архангельская область', timezone: 'UTC+3' },
+      '903': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '904': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '905': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '906': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '908': { operator: 'Билайн', region: 'Республика Башкортостан', timezone: 'UTC+5' },
+      '909': { operator: 'Билайн', region: 'Ростовская область', timezone: 'UTC+3' },
+      '910': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '911': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '912': { operator: 'МТС', region: 'Свердловская область', timezone: 'UTC+5' },
+      '913': { operator: 'МТС', region: 'Новосибирская область', timezone: 'UTC+7' },
+      '914': { operator: 'МТС', region: 'Красноярский край', timezone: 'UTC+7' },
+      '915': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '916': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '917': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '918': { operator: 'МТС', region: 'Краснодарский край', timezone: 'UTC+3' },
+      '919': { operator: 'МТС', region: 'Волгоградская область', timezone: 'UTC+3' },
+      '920': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
+      '921': { operator: 'Мегафон', region: 'Санкт-Петербург и ЛО', timezone: 'UTC+3' },
+      '922': { operator: 'Мегафон', region: 'Пермский край', timezone: 'UTC+5' },
+      '923': { operator: 'Мегафон', region: 'Красноярский край', timezone: 'UTC+7' },
+      '924': { operator: 'Мегафон', region: 'Красноярский край', timezone: 'UTC+7' },
+      '925': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
+      '926': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
+      '927': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
+      '928': { operator: 'Мегафон', region: 'Краснодарский край', timezone: 'UTC+3' },
+      '929': { operator: 'Мегафон', region: 'Москва и МО', timezone: 'UTC+3' },
+      '930': { operator: 'Мегафон', region: 'Воронежская область', timezone: 'UTC+3' },
+      '931': { operator: 'Мегафон', region: 'Кировская область', timezone: 'UTC+3' },
+      '932': { operator: 'Мегафон', region: 'Костромская область', timezone: 'UTC+3' },
+      '933': { operator: 'Мегафон', region: 'Рязанская область', timezone: 'UTC+3' },
+      '934': { operator: 'Мегафон', region: 'Ярославская область', timezone: 'UTC+3' },
+      '936': { operator: 'Мегафон', region: 'Воронежская область', timezone: 'UTC+3' },
+      '937': { operator: 'Мегафон', region: 'Нижний Новгород', timezone: 'UTC+3' },
+      '938': { operator: 'Мегафон', region: 'Пензенская область', timezone: 'UTC+3' },
+      '939': { operator: 'Мегафон', region: 'Самарская область', timezone: 'UTC+4' },
+      '950': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '951': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '952': { operator: 'Билайн', region: 'Санкт-Петербург и ЛО', timezone: 'UTC+3' },
+      '953': { operator: 'Билайн', region: 'Краснодарский край', timezone: 'UTC+3' },
+      '960': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '961': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '962': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '963': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '964': { operator: 'Билайн', region: 'Москва и МО', timezone: 'UTC+3' },
+      '965': { operator: 'Билайн', region: 'Санкт-Петербург и ЛО', timezone: 'UTC+3' },
+      '966': { operator: 'Билайн', region: 'Ростовская область', timezone: 'UTC+3' },
+      '967': { operator: 'Билайн', region: 'Волгоградская область', timezone: 'UTC+3' },
+      '968': { operator: 'Билайн', region: 'Пермский край', timezone: 'UTC+5' },
+      '969': { operator: 'Билайн', region: 'Свердловская область', timezone: 'UTC+5' },
+      '977': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '978': { operator: 'МТС', region: 'Республика Татарстан', timezone: 'UTC+3' },
+      '980': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '981': { operator: 'МТС', region: 'Санкт-Петербург и ЛО', timezone: 'UTC+3' },
+      '982': { operator: 'МТС', region: 'Республика Карелия', timezone: 'UTC+3' },
+      '983': { operator: 'МТС', region: 'Мурманская область', timezone: 'UTC+3' },
+      '984': { operator: 'МТС', region: 'Архангельская область', timezone: 'UTC+3' },
+      '985': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '986': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '987': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '988': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '989': { operator: 'МТС', region: 'Москва и МО', timezone: 'UTC+3' },
+      '991': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
+      '992': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
+      '993': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
+      '994': { operator: 'Скартел (Yota)', region: 'Москва и МО', timezone: 'UTC+3' },
     };
 
-    const mobileOperators: Record<string, string> = {
-      '900': 'МТС',
-      '901': 'МТС', 
-      '902': 'МТС',
-      '903': 'Билайн',
-      '904': 'Билайн',
-      '905': 'Билайн',
-      '906': 'Билайн',
-      '908': 'Билайн',
-      '909': 'Билайн',
-      '910': 'МТС',
-      '911': 'МТС',
-      '912': 'МТС',
-      '913': 'МТС',
-      '914': 'МТС',
-      '915': 'МТС',
-      '916': 'МТС',
-      '917': 'МТС',
-      '918': 'МТС',
-      '919': 'МТС',
-      '920': 'Мегафон',
-      '921': 'Мегафон',
-      '922': 'Мегафон',
-      '923': 'Мегафон',
-      '924': 'Мегафон',
-      '925': 'Мегафон',
-      '926': 'Мегафон',
-      '927': 'Мегафон',
-      '928': 'Мегафон',
-      '929': 'Мегафон',
-      '930': 'Мегафон',
-      '931': 'Мегафон',
-      '932': 'Мегафон',
-      '933': 'Мегафон',
-      '934': 'Мегафон',
-      '936': 'Мегафон',
-      '937': 'Мегафон',
-      '938': 'Мегафон',
-      '939': 'Мегафон',
-      '950': 'Билайн',
-      '951': 'Билайн',
-      '952': 'Билайн',
-      '953': 'Билайн',
-      '960': 'Билайн',
-      '961': 'Билайн',
-      '962': 'Билайн',
-      '963': 'Билайн',
-      '964': 'Билайн',
-      '965': 'Билайн',
-      '966': 'Билайн',
-      '967': 'Билайн',
-      '968': 'Билайн',
-      '969': 'Билайн',
-      '977': 'МТС',
-      '978': 'МТС',
-      '980': 'МТС',
-      '981': 'МТС',
-      '982': 'МТС',
-      '983': 'МТС',
-      '984': 'МТС',
-      '985': 'МТС',
-      '986': 'МТС',
-      '987': 'МТС',
-      '988': 'МТС',
-      '989': 'МТС',
-    };
+    const code = cleanPhone.substring(1, 4);
+    const mobileInfo = mobileCodeRegions[code];
 
-    let code = cleanPhone.substring(1, 4);
-    let info = phoneData[code];
-
-    if (!info) {
-      code = cleanPhone.substring(0, 3);
-      const operator = mobileOperators[code];
-      
-      if (operator) {
-        info = {
-          region: 'Мобильный номер',
-          timezone: 'Зависит от региона',
-          operator: operator,
-          status: 'Обслуживается'
-        };
-      } else {
-        info = {
-          region: 'Неизвестный регион',
-          timezone: 'Неизвестно',
-          operator: 'Неизвестный оператор',
-          status: 'Не обслуживается'
-        };
-      }
+    let info: any;
+    
+    if (mobileInfo) {
+      info = {
+        region: mobileInfo.region,
+        timezone: mobileInfo.timezone,
+        operator: mobileInfo.operator,
+        status: 'Обслуживается'
+      };
+    } else {
+      info = {
+        region: 'Неизвестный регион',
+        timezone: 'Неизвестно',
+        operator: 'Неизвестный оператор',
+        status: 'Не обслуживается'
+      };
     }
 
     setTimeout(() => {
