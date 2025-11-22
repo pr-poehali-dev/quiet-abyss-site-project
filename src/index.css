@@ -106,10 +106,12 @@
 @keyframes twinkle {
   0%,
   100% {
-    opacity: 0.3;
+    opacity: 0.2;
+    transform: scale(1);
   }
   50% {
     opacity: 1;
+    transform: scale(1.2);
   }
 }
 
@@ -129,4 +131,5 @@
   background: white;
   border-radius: 50%;
   animation: twinkle linear infinite;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
 }

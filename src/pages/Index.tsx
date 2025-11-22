@@ -6,13 +6,13 @@ const Index = () => {
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; duration: string; delay: string }>>([]);
 
   useEffect(() => {
-    const generatedStars = Array.from({ length: 100 }, (_, i) => ({
+    const generatedStars = Array.from({ length: 250 }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      size: `${Math.random() * 2 + 1}px`,
-      duration: `${Math.random() * 3 + 2}s`,
-      delay: `${Math.random() * 2}s`
+      size: `${Math.random() * 3 + 1}px`,
+      duration: `${Math.random() * 4 + 2}s`,
+      delay: `${Math.random() * 3}s`
     }));
     setStars(generatedStars);
   }, []);
