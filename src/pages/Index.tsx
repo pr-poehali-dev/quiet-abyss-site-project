@@ -12,13 +12,13 @@ const Index = () => {
   const [isChecking, setIsChecking] = useState(false);
 
   useEffect(() => {
-    const generatedSnowflakes = Array.from({ length: 150 }, (_, i) => ({
+    const generatedSnowflakes = Array.from({ length: 50 }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       size: `${Math.random() * 8 + 4}px`,
-      duration: `${Math.random() * 5 + 10}s`,
-      delay: `${Math.random() * 10}s`,
-      opacity: `${Math.random() * 0.5 + 0.5}`
+      duration: `${Math.random() * 5 + 8}s`,
+      delay: `-${Math.random() * 15}s`,
+      opacity: `${Math.random() * 0.4 + 0.6}`
     }));
     setSnowflakes(generatedSnowflakes);
   }, []);
@@ -152,7 +152,7 @@ const Index = () => {
             opacity: snowflake.opacity
           }}
         >
-          ❄️
+          •
         </div>
       ))}
 

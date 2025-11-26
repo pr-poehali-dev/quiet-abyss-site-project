@@ -135,11 +135,12 @@
 
 .snowflake {
   position: fixed;
-  color: white;
-  font-size: 20px;
+  color: #ffffff;
+  font-size: 16px;
   pointer-events: none;
   z-index: 1;
   animation:
     snowfall linear infinite,
     sway ease-in-out 2s infinite;
+  filter: blur(1px);
 }
