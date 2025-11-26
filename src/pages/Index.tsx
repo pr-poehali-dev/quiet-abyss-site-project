@@ -4,7 +4,7 @@ import Icon from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 
 const Index = () => {
-  const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: string; twinkleDuration: string; floatDuration: string; delay: string }>>([]);
+  const [snowflakes, setSnowflakes] = useState<Array<{ id: number; left: string; size: string; duration: string; delay: string; opacity: string }>>([]);
   const [dorkQuery, setDorkQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -12,16 +12,15 @@ const Index = () => {
   const [isChecking, setIsChecking] = useState(false);
 
   useEffect(() => {
-    const generatedStars = Array.from({ length: 250 }, (_, i) => ({
+    const generatedSnowflakes = Array.from({ length: 150 }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: `${Math.random() * 3 + 1}px`,
-      twinkleDuration: `${Math.random() * 3 + 2}s`,
-      floatDuration: `${Math.random() * 15 + 10}s`,
-      delay: `${Math.random() * 5}s`
+      size: `${Math.random() * 8 + 4}px`,
+      duration: `${Math.random() * 5 + 10}s`,
+      delay: `${Math.random() * 10}s`,
+      opacity: `${Math.random() * 0.5 + 0.5}`
     }));
-    setStars(generatedStars);
+    setSnowflakes(generatedSnowflakes);
   }, []);
 
   const checkPhoneNumber = () => {
@@ -140,19 +139,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden px-4 py-12">
-      {stars.map((star) => (
+      {snowflakes.map((snowflake) => (
         <div
-          key={star.id}
-          className="star"
+          key={snowflake.id}
+          className="snowflake"
           style={{
-            left: star.left,
-            top: star.top,
-            width: star.size,
-            height: star.size,
-            animationDuration: `${star.twinkleDuration}, ${star.floatDuration}`,
-            animationDelay: star.delay
+            left: snowflake.left,
+            width: snowflake.size,
+            height: snowflake.size,
+            animationDuration: snowflake.duration,
+            animationDelay: snowflake.delay,
+            opacity: snowflake.opacity
           }}
-        />
+        >
+          ❄️
+        </div>
       ))}
 
       <div className="relative z-10 max-w-4xl mx-auto space-y-16">
