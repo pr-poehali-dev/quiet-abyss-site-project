@@ -105,20 +105,20 @@
 
 @keyframes snowfall {
   0% {
-    transform: translateY(-10vh) rotate(0deg);
+    top: -10%;
   }
   100% {
-    transform: translateY(110vh) rotate(360deg);
+    top: 100%;
   }
 }
 
 @keyframes sway {
   0%,
   100% {
-    transform: translateX(0);
+    margin-left: 0px;
   }
   50% {
-    transform: translateX(20px);
+    margin-left: 50px;
   }
 }
 
@@ -134,14 +134,12 @@
 }
 
 .snowflake {
-  position: absolute;
-  top: -10vh;
-  font-size: 1.5rem;
-  color: #ffffff;
+  position: fixed;
+  color: white;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 1;
   animation:
     snowfall linear infinite,
-    sway ease-in-out 3s infinite;
-  pointer-events: none;
-  user-select: none;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    sway ease-in-out 2s infinite;
 }
