@@ -158,6 +158,14 @@ const Index = () => {
 
       <div className="relative z-10 max-w-4xl mx-auto space-y-16">
         <div className="text-center space-y-8 animate-[fadeIn_1s_ease-out] pt-12">
+          <div className="mb-6">
+            <span className="text-white text-3xl md:text-4xl font-bold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              New 
+            </span>
+            <span className="text-red-600 text-3xl md:text-4xl font-bold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Year
+            </span>
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Приветствуем в адаптере<br />
             <span className="text-gray-300">Тихого Омута</span>
@@ -242,7 +250,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
               <Icon name="Users" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>300+</div>
+              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>500+</div>
               <div className="text-gray-400 text-sm uppercase tracking-wider">Подписчиков</div>
             </div>
 
