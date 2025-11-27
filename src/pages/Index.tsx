@@ -13,6 +13,9 @@ const Index = () => {
   const [complaintText, setComplaintText] = useState('');
   const [isSubmittingComplaint, setIsSubmittingComplaint] = useState(false);
   const [complaintSubmitted, setComplaintSubmitted] = useState(false);
+  const [promoCode, setPromoCode] = useState('');
+  const [isPromoUnlocked, setIsPromoUnlocked] = useState(false);
+  const [promoError, setPromoError] = useState(false);
 
   useEffect(() => {
     const generatedSnowflakes = Array.from({ length: 50 }, (_, i) => ({
@@ -210,16 +213,18 @@ const Index = () => {
               Проверка номера
             </Button>
 
-            <Button 
-              onClick={() => {
-                const complaintSection = document.getElementById('complaint-section');
-                complaintSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }}
-              className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
-            >
-              <Icon name="AlertTriangle" className="mr-2" size={20} />
-              Пожаловаться
-            </Button>
+            {isPromoUnlocked && (
+              <Button 
+                onClick={() => {
+                  const complaintSection = document.getElementById('complaint-section');
+                  complaintSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }}
+                className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
+              >
+                <Icon name="AlertTriangle" className="mr-2" size={20} />
+                Пожаловаться
+              </Button>
+            )}
           </div>
         </div>
 
@@ -467,7 +472,46 @@ const Index = () => {
           </h2>
 
           <div className="space-y-6">
-            {!complaintSubmitted ? (
+            {!isPromoUnlocked ? (
+              <div className="bg-[#252525] rounded-xl p-8 border border-gray-700 text-center">
+                <Icon name="Lock" className="mx-auto mb-4 text-gray-500" size={64} />
+                <h3 className="text-2xl font-bold text-white mb-4">Требуется промокод</h3>
+                <p className="text-gray-400 mb-6">Введите промокод для доступа к разделу жалоб</p>
+                
+                <div className="max-w-md mx-auto space-y-4">
+                  <Input
+                    type="text"
+                    placeholder="Введите промокод"
+                    value={promoCode}
+                    onChange={(e) => {
+                      setPromoCode(e.target.value);
+                      setPromoError(false);
+                    }}
+                    className={`bg-[#1a1a1a] border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-600 text-center ${promoError ? 'border-red-500' : ''}`}
+                  />
+                  
+                  {promoError && (
+                    <p className="text-red-400 text-sm">Неверный промокод</p>
+                  )}
+                  
+                  <Button 
+                    onClick={() => {
+                      if (promoCode.toLowerCase() === 'core2026') {
+                        setIsPromoUnlocked(true);
+                        setPromoError(false);
+                      } else {
+                        setPromoError(true);
+                      }
+                    }}
+                    disabled={!promoCode.trim()}
+                    className="bg-white text-black hover:bg-gray-200 transition-colors w-full"
+                  >
+                    <Icon name="Unlock" className="mr-2" size={18} />
+                    Разблокировать
+                  </Button>
+                </div>
+              </div>
+            ) : !complaintSubmitted ? (
               <>
                 <textarea
                   placeholder="Опишите проблему и данные нарушителя..."
