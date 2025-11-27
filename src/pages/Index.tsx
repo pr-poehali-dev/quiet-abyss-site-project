@@ -16,6 +16,8 @@ const Index = () => {
   const [promoCode, setPromoCode] = useState('');
   const [isPromoUnlocked, setIsPromoUnlocked] = useState(false);
   const [promoError, setPromoError] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [processingComplete, setProcessingComplete] = useState(false);
 
   useEffect(() => {
     const generatedSnowflakes = Array.from({ length: 50 }, (_, i) => ({
@@ -27,7 +29,42 @@ const Index = () => {
       opacity: `${Math.random() * 0.4 + 0.6}`
     }));
     setSnowflakes(generatedSnowflakes);
+
+    const savedPromo = localStorage.getItem('complaint_promo_unlocked');
+    if (savedPromo === 'true') {
+      setIsPromoUnlocked(true);
+    }
   }, []);
+
+  const playNotificationSound = () => {
+    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZizcIEWmw6+ibUBEKTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMHElWo6c+gURQMTqPh8LV2JgcqgND0wm8gBS2C1PPUhzMH');
+    audio.volume = 0.5;
+    audio.play().catch(e => console.log('Sound play failed:', e));
+  };
+
+  const handleComplaintSubmit = () => {
+    if (complaintText.trim()) {
+      setIsSubmittingComplaint(true);
+      setTimeout(() => {
+        setIsSubmittingComplaint(false);
+        setComplaintSubmitted(true);
+        setIsProcessing(true);
+        
+        setTimeout(() => {
+          setIsProcessing(false);
+          setProcessingComplete(true);
+          playNotificationSound();
+          
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Обработка завершена!', {
+              body: 'Жалоба успешно обработана',
+              icon: '/favicon.ico'
+            });
+          }
+        }, 60000);
+      }, 1500);
+    }
+  };
 
   const checkPhoneNumber = () => {
     setIsChecking(true);
@@ -499,6 +536,11 @@ const Index = () => {
                       if (promoCode.toLowerCase() === 'core2026') {
                         setIsPromoUnlocked(true);
                         setPromoError(false);
+                        localStorage.setItem('complaint_promo_unlocked', 'true');
+                        
+                        if ('Notification' in window && Notification.permission === 'default') {
+                          Notification.requestPermission();
+                        }
                       } else {
                         setPromoError(true);
                       }
@@ -522,15 +564,7 @@ const Index = () => {
                 
                 <div className="flex justify-center">
                   <Button 
-                    onClick={() => {
-                      if (complaintText.trim()) {
-                        setIsSubmittingComplaint(true);
-                        setTimeout(() => {
-                          setIsSubmittingComplaint(false);
-                          setComplaintSubmitted(true);
-                        }, 1500);
-                      }
-                    }}
+                    onClick={handleComplaintSubmit}
                     disabled={isSubmittingComplaint || !complaintText.trim()}
                     className="bg-white text-black hover:bg-gray-200 transition-colors px-8 py-6 text-base"
                   >
@@ -562,21 +596,55 @@ const Index = () => {
               </>
             ) : (
               <div className="bg-[#252525] rounded-xl p-8 border border-gray-700 text-center">
-                <Icon name="CheckCircle" className="mx-auto mb-4 text-green-500" size={64} />
-                <h3 className="text-2xl font-bold text-white mb-3">Жалоба принята!</h3>
-                <p className="text-gray-400 mb-6">
-                  Процесс обработки начался. Пожалуйста, немного подождите.<br />
-                  Мы свяжемся с вами в ближайшее время.
-                </p>
-                <Button 
-                  onClick={() => {
-                    setComplaintSubmitted(false);
-                    setComplaintText('');
-                  }}
-                  className="bg-white text-black hover:bg-gray-200 transition-colors"
-                >
-                  Отправить еще жалобу
-                </Button>
+                {!processingComplete ? (
+                  <>
+                    {isProcessing ? (
+                      <>
+                        <Icon name="Loader2" className="mx-auto mb-4 text-blue-500 animate-spin" size={64} />
+                        <h3 className="text-2xl font-bold text-white mb-3">Процесс начался</h3>
+                        <p className="text-gray-400 mb-4">
+                          Обрабатываем вашу жалобу. Это займет около минуты.<br />
+                          Вы получите уведомление по завершению.
+                        </p>
+                        <div className="bg-[#1a1a1a] rounded-lg p-4 mt-4">
+                          <div className="flex items-center justify-center gap-2 text-gray-400">
+                            <Icon name="Clock" size={20} />
+                            <span>Примерное время: ~1 минута</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Icon name="CheckCircle" className="mx-auto mb-4 text-green-500" size={64} />
+                        <h3 className="text-2xl font-bold text-white mb-3">Жалоба принята!</h3>
+                        <p className="text-gray-400 mb-6">
+                          Процесс обработки начался. Пожалуйста, немного подождите.<br />
+                          Мы свяжемся с вами в ближайшее время.
+                        </p>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <Icon name="CheckCircle2" className="mx-auto mb-4 text-green-500 animate-pulse" size={64} />
+                    <h3 className="text-2xl font-bold text-white mb-3">Обработка завершена! 🎉</h3>
+                    <p className="text-gray-400 mb-6">
+                      Ваша жалоба успешно обработана.<br />
+                      Результаты отправлены администратору.
+                    </p>
+                    <Button 
+                      onClick={() => {
+                        setComplaintSubmitted(false);
+                        setComplaintText('');
+                        setProcessingComplete(false);
+                        setIsProcessing(false);
+                      }}
+                      className="bg-white text-black hover:bg-gray-200 transition-colors"
+                    >
+                      Отправить еще жалобу
+                    </Button>
+                  </>
+                )}
               </div>
             )}
           </div>
