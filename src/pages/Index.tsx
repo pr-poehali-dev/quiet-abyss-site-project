@@ -10,6 +10,9 @@ const Index = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneInfo, setPhoneInfo] = useState<any>(null);
   const [isChecking, setIsChecking] = useState(false);
+  const [complaintText, setComplaintText] = useState('');
+  const [isSubmittingComplaint, setIsSubmittingComplaint] = useState(false);
+  const [complaintSubmitted, setComplaintSubmitted] = useState(false);
 
   useEffect(() => {
     const generatedSnowflakes = Array.from({ length: 50 }, (_, i) => ({
@@ -205,6 +208,17 @@ const Index = () => {
             >
               <Icon name="Phone" className="mr-2" size={20} />
               Проверка номера
+            </Button>
+
+            <Button 
+              onClick={() => {
+                const complaintSection = document.getElementById('complaint-section');
+                complaintSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
+            >
+              <Icon name="AlertTriangle" className="mr-2" size={20} />
+              Пожаловаться
             </Button>
           </div>
         </div>
@@ -442,6 +456,83 @@ const Index = () => {
               <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center">
                 <Icon name="Phone" className="mx-auto mb-4 text-gray-500" size={48} />
                 <p className="text-gray-400">Введите номер телефона для проверки</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div id="complaint-section" className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_3.5s_ease-out]">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            Пожаловаться на нарушителя
+          </h2>
+
+          <div className="space-y-6">
+            {!complaintSubmitted ? (
+              <>
+                <textarea
+                  placeholder="Опишите проблему и данные нарушителя..."
+                  value={complaintText}
+                  onChange={(e) => setComplaintText(e.target.value)}
+                  className="w-full h-40 bg-[#252525] border border-gray-700 rounded-xl p-4 text-white placeholder:text-gray-500 focus:border-gray-600 focus:outline-none resize-none"
+                />
+                
+                <div className="flex justify-center">
+                  <Button 
+                    onClick={() => {
+                      if (complaintText.trim()) {
+                        setIsSubmittingComplaint(true);
+                        setTimeout(() => {
+                          setIsSubmittingComplaint(false);
+                          setComplaintSubmitted(true);
+                        }, 1500);
+                      }
+                    }}
+                    disabled={isSubmittingComplaint || !complaintText.trim()}
+                    className="bg-white text-black hover:bg-gray-200 transition-colors px-8 py-6 text-base"
+                  >
+                    {isSubmittingComplaint ? (
+                      <>
+                        <Icon name="Loader2" className="mr-2 animate-spin" size={20} />
+                        Отправка...
+                      </>
+                    ) : (
+                      <>
+                        <Icon name="Send" className="mr-2" size={20} />
+                        Отправить жалобу
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="bg-[#252525] rounded-xl p-6 border border-gray-700">
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
+                    <Icon name="Info" className="mr-2" size={20} />
+                    Важная информация
+                  </h3>
+                  <ul className="space-y-2 text-gray-400 text-sm">
+                    <li>• Укажите все известные данные о нарушителе</li>
+                    <li>• Опишите суть нарушения максимально подробно</li>
+                    <li>• Приложите доказательства, если есть возможность</li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <div className="bg-[#252525] rounded-xl p-8 border border-gray-700 text-center">
+                <Icon name="CheckCircle" className="mx-auto mb-4 text-green-500" size={64} />
+                <h3 className="text-2xl font-bold text-white mb-3">Жалоба принята!</h3>
+                <p className="text-gray-400 mb-6">
+                  Процесс обработки начался. Пожалуйста, немного подождите.<br />
+                  Мы свяжемся с вами в ближайшее время.
+                </p>
+                <Button 
+                  onClick={() => {
+                    setComplaintSubmitted(false);
+                    setComplaintText('');
+                  }}
+                  className="bg-white text-black hover:bg-gray-200 transition-colors"
+                >
+                  Отправить еще жалобу
+                </Button>
               </div>
             )}
           </div>
