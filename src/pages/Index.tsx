@@ -176,21 +176,12 @@ const Index = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="https://t.me/+KRT20SAnApA3ZThh" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/+JltAzyHSRlQxMDMy" target="_blank" rel="noopener noreferrer">
               <Button 
                 className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
               >
                 <Icon name="Send" className="mr-2" size={20} />
                 hell.net
-              </Button>
-            </a>
-
-            <a href="https://t.me/freedefto" target="_blank" rel="noopener noreferrer">
-              <Button 
-                className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
-              >
-                <Icon name="Heart" className="mr-2" size={20} />
-                Бесплатная помощь
               </Button>
             </a>
 
@@ -234,9 +225,9 @@ const Index = () => {
                 Как получить помощь?
               </h3>
               <ol className="list-decimal list-inside space-y-3 text-gray-300">
-                <li>Подпишитесь на 2 канала выше (hell.net и Бесплатная помощь)</li>
-                <li>Сделайте скриншоты подписок</li>
-                <li>Отправьте скриншоты <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors underline">@fuckIsolated</a> в Telegram</li>
+                <li>Подпишитесь на канал выше (hell.net)</li>
+                <li>Сделайте скриншот подписки</li>
+                <li>Отправьте скриншот <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors underline">@fuckIsolated</a> в Telegram</li>
               </ol>
             </div>
           </div>
