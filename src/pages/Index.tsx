@@ -168,7 +168,7 @@ const Index = () => {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Приветствуем в адаптере<br />
-            <span className="text-gray-300">Тихого Омута</span>
+            <span className="text-gray-300">hell.net</span>
           </h1>
 
           <p className="text-gray-400 text-lg md:text-xl mb-12">
@@ -181,7 +181,7 @@ const Index = () => {
                 className="bg-[#404040] hover:bg-[#505050] text-white border-none transition-all duration-300 hover:scale-105 px-8 py-6 text-base w-full sm:w-auto"
               >
                 <Icon name="Send" className="mr-2" size={20} />
-                Тихий Омут
+                hell.net
               </Button>
             </a>
 
@@ -234,36 +234,10 @@ const Index = () => {
                 Как получить помощь?
               </h3>
               <ol className="list-decimal list-inside space-y-3 text-gray-300">
-                <li>Подпишитесь на 2 канала выше (Тихий Омут и Бесплатная помощь)</li>
+                <li>Подпишитесь на 2 канала выше (hell.net и Бесплатная помощь)</li>
                 <li>Сделайте скриншоты подписок</li>
                 <li>Отправьте скриншоты <a href="https://t.me/fuckIsolated" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors underline">@fuckIsolated</a> в Telegram</li>
               </ol>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 border border-gray-800 animate-[fadeIn_2s_ease-out]">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Наша статистика
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
-              <Icon name="Users" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>500+</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">Подписчиков</div>
-            </div>
-
-            <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
-              <Icon name="Shield" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>35+</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">Под защитой</div>
-            </div>
-
-            <div className="bg-[#252525] rounded-xl p-6 border border-gray-700 text-center transition-all duration-300 hover:scale-105 hover:border-gray-600">
-              <Icon name="Briefcase" className="mx-auto mb-4 text-gray-400" size={48} />
-              <div className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>25+</div>
-              <div className="text-gray-400 text-sm uppercase tracking-wider">Работ выполнено</div>
             </div>
           </div>
         </div>
